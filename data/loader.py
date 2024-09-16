@@ -62,32 +62,11 @@ def get_dataset_old(dataset_path, image_size):
         ]
     )
     dataset = ChCalliDataset(dataset_dir=dataset_path, transform=preprocess)
-
-    # train_dataloader = DataLoader(dataset, batch_size=16, shuffle=True)
-    # for step, batch in enumerate(train_dataloader):
-    #     clean_images = batch["images"]
-    #     clean_text = batch["texts"]
-    #     print(clean_images.shape, clean_text)
-    #     pdb.set_trace()
-    # sample_image = dataset[0]["images"].unsqueeze(0)
-    # pdb.set_trace()
-
     return dataset
-
-
-
 
 def get_dataset_butterfly(dataset_path, image_size):
     '''dataset[0]  // dataset.info // '''
     dataset = load_dataset(dataset_path, split="train")
-    # fig, axs = plt.subplots(1, 4, figsize=(16, 4))
-    # for i, image in enumerate(dataset[:4]["image"]):
-    #     axs[i].imshow(image)
-    #     axs[i].set_axis_off()
-
-    # fig.savefig('my_figure.png') 
-    # fig_1 = dataset[4]["image"]
-    # fig_1.save('my_figure_5.png')
     preprocess = transforms.Compose(
         [
             transforms.Resize((image_size, image_size)),
@@ -102,27 +81,8 @@ def get_dataset_butterfly(dataset_path, image_size):
 
     dataset.set_transform(transform)
 
-    '''canbe work'''
-    # tensor_image = dataset[1]["images"]
 
-    # transform_img = transforms.ToPILImage()
-    # image = transform_img(tensor_image)
-    # image.save('output_image.png')
-    # pdb.set_trace()
-    '''not work:'''
-    # tensor_image = (tensor_image + 1) / 2
-    # tensor_image = tensor_image * 255
-    # numpy_image = tensor_image.numpy().astype(np.uint8)
-    # numpy_image = tensor_image.permute(1, 2, 0).numpy()
-    # image = Image.fromarray(numpy_image)
-    # # image = Image.fromarray(numpy_image.squeeze(), mode='L')
-    # image.save('output_image.png')
-    # pdb.set_trace()
     return dataset
 
 
 
-
-if __name__ == "__main__":
-    pass
-    get_dataset("/app/dpm_prj/dataset/calligraphy", image_size=64)
